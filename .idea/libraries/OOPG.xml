@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="OOPG">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/OOPG.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
