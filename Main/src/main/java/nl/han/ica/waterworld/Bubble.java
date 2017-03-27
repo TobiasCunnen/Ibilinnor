@@ -53,7 +53,7 @@ public class Bubble extends GameObject implements ICollidableWithGameObjects{
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
         for (GameObject g:collidedGameObjects) {
-            if (g instanceof Swordfish) {
+            if (g instanceof Player) {
                 popSound.rewind();
                 popSound.play();
                 world.deleteGameObject(this);
