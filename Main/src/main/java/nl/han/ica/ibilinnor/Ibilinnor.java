@@ -10,19 +10,20 @@ import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
 import nl.han.ica.OOPDProcessingEngineHAN.View.EdgeFollowingViewport;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
-import nl.han.ica.waterworld.tiles.BoardsTile;
+import nl.han.ica.ibilinnor.tiles.GrassTile;
 import processing.core.PApplet;
 
 public class Ibilinnor extends GameEngine{
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+        PApplet.main(new String[]{"nl.han.ica.ibilinnor.Ibilinnor"});
 
 	}
 
 	@Override
 	public void setupGame() {
-		setupWorld();
+		World aestamar = new World();
+		aestamar.setupWorld();
 		
 	}
 
