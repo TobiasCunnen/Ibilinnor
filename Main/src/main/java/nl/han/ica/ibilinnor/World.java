@@ -14,7 +14,11 @@ public class World extends GameEngine {
 	}
 
 	@Override
-	public void setupGame() {
+	public void setupGame(){
+		
+	}
+	
+	public void setupWorld() {
 
 		int worldWidth = 1600;
 		int worldHeight = 900;
