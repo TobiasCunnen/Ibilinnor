@@ -31,10 +31,10 @@ public class World extends GameEngine {
 	}
 
 	private void initializeTileMap() {
-		Sprite boardsSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/groundTile.png");
-		TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
+		Sprite grassSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/grassTile.png");
+		TileType<GrassTile> grassTileType = new TileType<>(GrassTile.class, grassSprite);
 
-		TileType[] tileTypes = { boardTileType };
+		TileType[] tileTypes = { grassTileType };
 		int tileSize = 50;
 		int tilesMap[][] = { 
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
