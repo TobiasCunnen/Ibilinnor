@@ -22,7 +22,7 @@ public class Ibilinnor extends GameEngine{
 
 	@Override
 	public void setupGame() {
-		// TODO Auto-generated method stub
+		setupWorld();
 		
 	}
 

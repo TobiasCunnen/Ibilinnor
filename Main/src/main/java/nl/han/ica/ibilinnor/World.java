@@ -5,7 +5,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
-import nl.han.ica.waterworld.tiles.BoardsTile;
+import nl.han.ica.ibilinnor.tiles.GrassTile;
 
 public class World extends GameEngine {
 
