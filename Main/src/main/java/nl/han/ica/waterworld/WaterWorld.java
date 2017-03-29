@@ -144,7 +144,7 @@ public class WaterWorld extends GameEngine {
      */
     private void initializeTileMap() {
         /* TILES */
-        Sprite boardsSprite = new Sprite("src/main/java/nl/han/ica/waterworld/media/boards.jpg");
+        Sprite boardsSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/grassTile.png");
         TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
 
         TileType[] tileTypes = { boardTileType };
