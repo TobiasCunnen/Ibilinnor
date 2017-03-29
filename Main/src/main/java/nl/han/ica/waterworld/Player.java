@@ -24,7 +24,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      * @param world Referentie naar de wereld
      */
     public Player(WaterWorld world) {
-        super(new Sprite("src/main/java/nl/han/ica/waterworld/media/player.png"),2);
+        super(new Sprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif"),1);
         this.world=world;
         setCurrentFrameIndex(1);
         setFriction(0.05f);
@@ -62,7 +62,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         }
         if (keyCode == world.RIGHT) {
             setDirectionSpeed(90, speed);
-            setCurrentFrameIndex(1);
+            setCurrentFrameIndex(0);
         }
         if (keyCode == world.DOWN) {
             setDirectionSpeed(180, speed);

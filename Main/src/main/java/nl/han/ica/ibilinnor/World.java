@@ -6,9 +6,13 @@ import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
+import nl.han.ica.waterworld.Player;
+import nl.han.ica.waterworld.Swordfish;
 import processing.core.PApplet;
 
 public class World extends GameEngine {
+	
+	private Slime slime;
 
 	public static void main(String[] args) {
         PApplet.main(new String[]{"nl.han.ica.ibilinnor.World"});
@@ -26,6 +30,9 @@ public class World extends GameEngine {
 		int worldHeight = 900;
 
 		initializeTileMap();
+		
+		createObjects();
+		
 		createView(worldWidth, worldHeight);
 
 	}
@@ -35,6 +42,12 @@ public class World extends GameEngine {
 		// TODO Auto-generated method stub
 
 	}
+	
+    private void createObjects() {
+        slime=new Slime();
+        addGameObject(slime, 800, 800); //(object, x,y)
+    }
+
 
 	private void initializeTileMap() {
 		Sprite grassSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/grassTile.png");
