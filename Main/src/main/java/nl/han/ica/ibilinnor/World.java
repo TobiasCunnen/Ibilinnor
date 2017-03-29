@@ -4,6 +4,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
+import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import nl.han.ica.waterworld.tiles.BoardsTile;
 
 public class World extends GameEngine {
@@ -14,7 +15,12 @@ public class World extends GameEngine {
 
 	@Override
 	public void setupGame() {
-		
+
+		int worldWidth = 1600;
+		int worldHeight = 900;
+
+		initializeTileMap();
+		createView(worldWidth, worldHeight);
 
 	}
 
@@ -23,30 +29,36 @@ public class World extends GameEngine {
 		// TODO Auto-generated method stub
 
 	}
-	
-	private void initializeTileMap(){
-		Sprite boardsSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/groundTile.png");
-        TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
 
-        TileType[] tileTypes = { boardTileType };
-        int tileSize=50;
-        int tilesMap[][]={
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1, 0, 0, 0, 0,-1,0 , 0},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-                {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
-        };
-        tileMap = new TileMap(tileSize, tileTypes, tilesMap);
+	private void initializeTileMap() {
+		Sprite boardsSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/groundTile.png");
+		TileType<BoardsTile> boardTileType = new TileType<>(BoardsTile.class, boardsSprite);
+
+		TileType[] tileTypes = { boardTileType };
+		int tileSize = 50;
+		int tilesMap[][] = { { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
+				{ -1, -1, 0, 0, 0, 0, 0, -1, 0, 0 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } };
+		tileMap = new TileMap(tileSize, tileTypes, tilesMap);
+	}
+
+	private void createView(int screenWidth, int screenHeight) {
+		View view = new View(screenWidth, screenHeight);
+		view.setBackground(loadImage("src/main/java/nl/han/ica/ibilinnor/media/background.png"));
+
+		setView(view);
+		size(screenWidth, screenHeight);
 	}
 
 }
