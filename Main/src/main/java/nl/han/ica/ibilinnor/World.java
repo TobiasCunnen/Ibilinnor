@@ -6,8 +6,6 @@ import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
-import nl.han.ica.waterworld.Player;
-import nl.han.ica.waterworld.Swordfish;
 import processing.core.PApplet;
 
 public class World extends GameEngine {
