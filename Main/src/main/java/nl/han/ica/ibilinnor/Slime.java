@@ -13,7 +13,7 @@ public class Slime extends Enemy {
 	
 
 	public Slime(World world) {
-		super(sprite,1,800,800,world);
+		super(sprite,1,800,800);
 		
 	}
 	
@@ -44,28 +44,6 @@ public class Slime extends Enemy {
 
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles)  {
-        PVector vector;
-
-        for (CollidedTile ct : collidedTiles) {
-            if (ct.theTile instanceof BoardsTile) {
-                if (ct.collisionSide == ct.TOP) {
-                    try {
-                        vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-                        setY(vector.y - getHeight());
-                    } catch (TileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (ct.collisionSide == ct.RIGHT) {
-                    try {
-                        vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-                        world.getTileMap().setTile((int) vector.x / 50, (int) vector.y / 50, -1);
-                    } catch (TileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
     }
 
 	@Override

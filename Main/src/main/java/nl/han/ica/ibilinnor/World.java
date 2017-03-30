@@ -25,7 +25,7 @@ public class World extends GameEngine {
 	public void setupWorld() {
 
 		int worldWidth = 1600;
-		int worldHeight = 900;
+		int worldHeight = 800;
 
 		initializeTileMap();
 		
@@ -70,7 +70,7 @@ public class World extends GameEngine {
 
 	private void createView(int screenWidth, int screenHeight) {
 		View view = new View(screenWidth, screenHeight);
-		view.setBackground(loadImage("src/main/java/nl/han/ica/ibilinnor/media/background.png"));
+		view.setBackground(loadImage("src/main/java/nl/han/ica/ibilinnor/media/background_168.png"));
 
 		setView(view);
 		size(screenWidth, screenHeight);
