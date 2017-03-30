@@ -44,7 +44,7 @@ public class Slime extends Enemy implements ICollidableWithTiles {
         }
         if (key == ' ') {
         	setDirectionSpeed(0, 0);
-        	sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
+        	//sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
         } 
     }
 
