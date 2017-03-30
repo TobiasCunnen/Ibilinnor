@@ -6,6 +6,8 @@ import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
+import nl.han.ica.ibilinnor.tiles.GroundTile;
+import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PApplet;
 
 public class World extends GameEngine {
@@ -50,8 +52,12 @@ public class World extends GameEngine {
 	private void initializeTileMap() {
 		Sprite grassSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/grassTile.png");
 		TileType<GrassTile> grassTileType = new TileType<>(GrassTile.class, grassSprite);
+		Sprite groundSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/groundTile.png");
+		TileType<GroundTile> groundTileType = new TileType<>(GroundTile.class, groundSprite);
+		Sprite secretSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/secretGroundTile.png");
+		TileType<SecretTile> secretTileType = new TileType<>(SecretTile.class, secretSprite);
 
-		TileType[] tileTypes = { grassTileType };
+		TileType[] tileTypes = { grassTileType, groundTileType, secretTileType };
 		int tileSize = 80;
 		int tilesMap[][] = { 
 				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },
