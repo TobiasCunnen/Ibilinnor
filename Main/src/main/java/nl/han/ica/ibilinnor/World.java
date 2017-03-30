@@ -54,7 +54,7 @@ public class World extends GameEngine {
 		TileType<GrassTile> grassTileType = new TileType<>(GrassTile.class, grassSprite);
 		Sprite groundSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/groundTile.png");
 		TileType<GroundTile> groundTileType = new TileType<>(GroundTile.class, groundSprite);
-		Sprite secretSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/secretGroundTile.png");
+		Sprite secretSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/groundTile.png");
 		TileType<SecretTile> secretTileType = new TileType<>(SecretTile.class, secretSprite);
 
 		TileType[] tileTypes = { grassTileType, groundTileType, secretTileType };
