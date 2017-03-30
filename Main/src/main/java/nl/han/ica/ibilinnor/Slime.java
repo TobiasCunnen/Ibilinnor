@@ -24,7 +24,7 @@ public class Slime extends Enemy {
         if (keyCode == LEFT) {
             setDirectionSpeed(270, super.vX);
             setCurrentFrameIndex(0);
-            sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/walk_left_animation.gif");
+            sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/walk_left_animation2.gif");
         }
         if (keyCode == UP) {
             setDirectionSpeed(0, super.vY);
