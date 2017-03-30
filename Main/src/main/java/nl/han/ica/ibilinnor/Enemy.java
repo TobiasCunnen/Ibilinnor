@@ -19,9 +19,9 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 	protected int y;
 	protected int vX;
 	protected int vY;
-	protected World world;
+
 	
-	public Enemy(Sprite sprite, int totalFrames, int x , int y,World world) {
+	public Enemy(Sprite sprite, int totalFrames, int x , int y) {
 		super(sprite, totalFrames);
 		this.x=x;
 		this.y=y;
@@ -29,7 +29,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 		this.damage=1;
 		this.vX=3;
 		this.vY=3;
-		this.world=world;
+		
 	}
 
 	public void walkLeft(){
