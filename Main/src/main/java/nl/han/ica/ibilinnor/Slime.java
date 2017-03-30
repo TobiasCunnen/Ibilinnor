@@ -9,7 +9,7 @@ import nl.han.ica.waterworld.tiles.BoardsTile;
 import processing.core.PVector;
 
 public class Slime extends Enemy {
-	static Sprite sprite=new Sprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation2.gif");
+	static Sprite sprite=new Sprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
 	
 
 	public Slime(World world) {
@@ -24,7 +24,7 @@ public class Slime extends Enemy {
         if (keyCode == LEFT) {
             setDirectionSpeed(270, super.vX);
             setCurrentFrameIndex(0);
-            sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/walk_left_animation2.gif");
+            sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/walk_left_animation.gif");
         }
         if (keyCode == UP) {
             setDirectionSpeed(0, super.vY);
@@ -38,7 +38,7 @@ public class Slime extends Enemy {
         }
         if (key == ' ') {
         	setDirectionSpeed(0, 0);
-        	sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation2.gif");
+        	sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
         } 
     }
 
