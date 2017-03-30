@@ -51,28 +51,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles)  {
-        PVector vector;
 
-        for (CollidedTile ct : collidedTiles) {
-            if (ct.theTile instanceof BoardsTile) {
-                if (ct.collisionSide == ct.TOP) {
-                    try {
-                        vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-                        setY(vector.y - getHeight());
-                    } catch (TileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (ct.collisionSide == ct.RIGHT) {
-                    try {
-                        vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-                        world.getTileMap().setTile((int) vector.x / 50, (int) vector.y / 50, -1);
-                    } catch (TileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
     }
 
 	public float getX() {
