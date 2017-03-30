@@ -44,7 +44,7 @@ public class World extends GameEngine {
 	}
 	
     private void createObjects() {
-        slime=new Slime();
+        slime=new Slime(this);
         addGameObject(slime, slime.getX(), slime.getY()); 
     }
 
