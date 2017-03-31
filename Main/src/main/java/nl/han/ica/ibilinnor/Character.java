@@ -10,6 +10,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;
+import processing.core.PGraphics;
 import processing.core.PVector;
 
 public class Character extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
@@ -21,7 +22,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 	public Character(World world, int x, int y) {
 		super(sprite, 1);
 		this.world = world;
-		jumpHeight = 10;
+		jumpHeight = 30;
 		setX(x);
 		setY(y);
 		setFriction(0.10f);
@@ -51,18 +52,18 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		}
 		if (keyCode == DOWN) {
 			setDirectionSpeed(180, speed);
+			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_effect_animation.gif");
 		}
 		if (key == ' ') {
-			float tempY = getY();
+
 
 			setDirectionSpeed(0, jumpHeight);
-			if (getY() == tempY) {
-
-			}
+			
 
 		}
 		if (key == ENTER) {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
+			draw(attackSprite);
 		}
 	}
 
