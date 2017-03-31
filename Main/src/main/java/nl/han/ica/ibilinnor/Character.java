@@ -10,6 +10,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;
+import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PGraphics;
 import processing.core.PVector;
 
@@ -56,14 +57,12 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		}
 		if (key == ' ') {
 
-
 			setDirectionSpeed(0, jumpHeight);
-			
 
 		}
 		if (key == ENTER) {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
-			
+
 		}
 	}
 
@@ -72,40 +71,40 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		PVector vector;
 
 		for (CollidedTile ct : collidedTiles) {
-			if (ct.theTile instanceof GrassTile || ct.theTile instanceof GroundTile)
+			if (ct.theTile instanceof GrassTile || ct.theTile instanceof GroundTile) {
 
-			{
-
-				if (ct.collisionSide == ct.TOP)
-
-				{
+				if (ct.collisionSide == ct.TOP) {
 
 					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-
 					setY(vector.y - height);
-
 				}
 
-				if (ct.collisionSide == ct.LEFT)
-
-				{
+				if (ct.collisionSide == ct.LEFT) {
 
 					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-
 					setX(vector.x - width);
-
 				}
 
-				if (ct.collisionSide == ct.RIGHT)
-
-				{
+				if (ct.collisionSide == ct.RIGHT) {
 
 					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-
 					setX(vector.x + world.getTileMap().getTileSize());
 
 				}
+			}
 
+			if (ct.theTile instanceof GroundTile) {
+				if (ct.collisionSide == ct.BOTTOM) {
+
+					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
+					setY(vector.y + height+10);
+				}
+			}
+			if (ct.theTile instanceof SecretTile) {
+				if (ct.collisionSide == ct.INSIDE) {
+					Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/secretTile.png");
+					ct.theTile.setSprite(sprite);
+				}
 			}
 		}
 	}

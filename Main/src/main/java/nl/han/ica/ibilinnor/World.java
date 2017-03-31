@@ -50,7 +50,6 @@ public class World extends GameEngine {
        // addGameObject(slime, slime.getX(), slime.getY()); 
         player = new Character(this,100,300);
         addGameObject(player,100,300);
-       
     }
 
 
@@ -82,7 +81,7 @@ public class World extends GameEngine {
 
 	private void createView(int screenWidth, int screenHeight) {
 		View view = new View(screenWidth, screenHeight);
-		view.setBackground(loadImage("src/main/java/nl/han/ica/ibilinnor/media/background_168.png"));
+		view.setBackground(loadImage("src/main/java/nl/han/ica/ibilinnor/media/background.png"));
 
 		setView(view);
 		size(screenWidth, screenHeight);
