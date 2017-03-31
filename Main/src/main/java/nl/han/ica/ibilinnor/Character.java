@@ -64,7 +64,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 
 		}
 		if (keyCode == UP) {
-			setDirectionSpeed(0, speed);
+			setDirectionSpeed(0, jumpHeight);
 		}
 		if (keyCode == RIGHT) {
 			setDirectionSpeed(90, speed);
@@ -73,14 +73,8 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		}
 		if (keyCode == DOWN) {
 			setDirectionSpeed(180, speed);
-			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_effect_animation.gif");
 		}
-		if (key == ' ') {
-
-			setDirectionSpeed(0, jumpHeight);
-
-		}
-		if (key == ENTER) {
+		if (key == 	' ') {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
 			addGameObject();
 			
