@@ -12,7 +12,7 @@ public class Attack extends AnimatedSpriteObject implements ICollidableWithGameO
 	private World world;
 	
 	public Attack(World world) {
-		super(new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_effect.png"), 2);
+		super(new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_effect_animation.gif"), 1);
 		
 		this.world=world;
 	}

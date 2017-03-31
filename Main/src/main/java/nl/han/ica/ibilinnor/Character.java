@@ -2,6 +2,8 @@ package nl.han.ica.ibilinnor;
 
 import java.util.List;
 
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.CollidedTile;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithTiles;
@@ -13,7 +15,7 @@ import nl.han.ica.ibilinnor.tiles.GroundTile;
 import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PVector;
 
-public class Character extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
+public class Character extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects, IAlarmListener{
 
 	World world;
 	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
@@ -31,27 +33,27 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		attack = new Attack(world);
 	}
 
-    @Override
-    public void update() {
-        if (getX()<=0) {
-            setxSpeed(0);
-            setX(0);
-        }
-     
-        if (getY()<=0) {
-            setySpeed(0);
-            setY(0);
-        }
-        if (getX()>=world.getWidth()-getWidth()) {
-            setxSpeed(0);
-            setX(world.getWidth() - getWidth());
-        }
-        if (getY()>=world.getHeight()-getHeight()) {
-            setySpeed(0);
-            setY(world.getHeight() - getHeight());
-        }
+	@Override
+	public void update() {
+		if (getX() <= 0) {
+			setxSpeed(0);
+			setX(0);
+		}
 
-    }
+		if (getY() <= 0) {
+			setySpeed(0);
+			setY(0);
+		}
+		if (getX() >= world.getWidth() - getWidth()) {
+			setxSpeed(0);
+			setX(world.getWidth() - getWidth());
+		}
+		if (getY() >= world.getHeight() - getHeight()) {
+			setySpeed(0);
+			setY(world.getHeight() - getHeight());
+		}
+
+	}
 
 	@Override
 	public void keyPressed(int keyCode, char key) {
@@ -81,9 +83,14 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		if (key == ENTER) {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
 			addGameObject();
-			removeGameObject();
 			
+			Alarm alarm = new Alarm("hoi", 0.3);
+			alarm.addTarget(this);
+
+			alarm.start();
+	
 		}
+
 	}
 
 	@Override
@@ -139,14 +146,18 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 	}
 
 	public void addGameObject() {
-		
+
 		world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
-		
-        attack.nextFrame();      
+
 	}
-	public void removeGameObject(){
-		if(attack.getCurrentFrameIndex()==1){
-			world.deleteGameObject(attack);
-		}
+
+	public void removeGameObject() {
+		world.deleteGameObject(attack);
+	}
+
+	@Override
+	public void triggerAlarm(String alarmName) {
+		removeGameObject();
+		
 	}
 }
