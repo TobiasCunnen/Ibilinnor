@@ -41,15 +41,17 @@ public class World extends GameEngine {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		//System.out.println(player.getX());
+		//System.out.println(player.getY());
 
 	}
 	
     private void createObjects() {
-        slime=new Slime(this,600,600);
-       // addGameObject(slime, slime.getX(), slime.getY()); 
+        slime=new Slime(this,420,160);
+        addGameObject(slime, slime.getX(), slime.getY()); 
         player = new Character(this,100,300);
-        addGameObject(player,100,300);
+        addGameObject(player,25,560);
+
     }
 
 
@@ -74,7 +76,6 @@ public class World extends GameEngine {
 				{-1,-1,-1,-1,0,-1,-1,-1,-1,2,2,-1,1,-1,2,2,2,2,2,2},
 				{0,-1,-1,-1,1,-1,-1,-1,-1,2,2,-1,1,-1,2,2,2,2,2,2},
 				{1,0,0,0,1,0,0,0,0,1,1,0,1,0,1,1,1,1,1,1}
-
 				};
 		tileMap = new TileMap(tileSize, tileTypes, tilesMap);
 	}

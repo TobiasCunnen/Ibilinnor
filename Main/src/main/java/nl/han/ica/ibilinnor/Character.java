@@ -11,7 +11,6 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;
 import nl.han.ica.ibilinnor.tiles.SecretTile;
-import processing.core.PGraphics;
 import processing.core.PVector;
 
 public class Character extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
@@ -62,6 +61,8 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		}
 		if (key == ENTER) {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
+			addGameObject();
+
 
 		}
 	}
@@ -116,6 +117,10 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 				world.deleteGameObject(this);
 			}
 		}
+	}
+	public void addGameObject(){
+        Attack attack = new Attack(world);
+        world.addGameObject(attack,this.getX()+attack.getWidth(),this.getY());
 	}
 
 }
