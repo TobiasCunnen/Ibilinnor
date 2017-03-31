@@ -18,6 +18,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 	World world;
 	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
 	float jumpHeight;
+	Attack attack;
 
 	public Character(World world, int x, int y) {
 		super(sprite, 1);
@@ -27,6 +28,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		setY(y);
 		setFriction(0.10f);
 		setGravity(0.5f);
+		attack = new Attack(world);
 	}
 
 	@Override
@@ -62,8 +64,8 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		if (key == ENTER) {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
 			addGameObject();
-
-
+			removeGameObject();
+			
 		}
 	}
 
@@ -98,7 +100,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 				if (ct.collisionSide == ct.BOTTOM) {
 
 					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
-					setY(vector.y + height+10);
+					setY(vector.y + height + 10);
 				}
 			}
 			if (ct.theTile instanceof SecretTile) {
@@ -118,9 +120,16 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 			}
 		}
 	}
-	public void addGameObject(){
-        Attack attack = new Attack(world);
-        world.addGameObject(attack,this.getX()+attack.getWidth(),this.getY());
-	}
 
+	public void addGameObject() {
+		
+		world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
+		
+        attack.nextFrame();      
+	}
+	public void removeGameObject(){
+		if(attack.getCurrentFrameIndex()==1){
+			world.deleteGameObject(attack);
+		}
+	}
 }

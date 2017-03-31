@@ -12,7 +12,7 @@ import processing.core.PApplet;
 
 public class World extends GameEngine {
 	
-	private Slime slime;
+	private Enemy slime;
 	private Character player;
 
 	public static void main(String[] args) {
