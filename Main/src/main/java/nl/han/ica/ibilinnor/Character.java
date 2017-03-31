@@ -63,7 +63,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		}
 		if (key == ENTER) {
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
-			draw(attackSprite);
+			
 		}
 	}
 

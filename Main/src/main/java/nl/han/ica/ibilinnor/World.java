@@ -50,6 +50,7 @@ public class World extends GameEngine {
        // addGameObject(slime, slime.getX(), slime.getY()); 
         player = new Character(this,100,300);
         addGameObject(player,100,300);
+       
     }
 
 
