@@ -11,21 +11,11 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 	
 	protected int health;
 	protected int damage;
-	protected Sprite sprite;
-	protected int x;
-	protected int y;
-	protected int vX;
-	protected int vY;
-
 	
-	public Enemy(Sprite sprite, int totalFrames, int x , int y) {
+	public Enemy(Sprite sprite, int totalFrames) {
 		super(sprite, totalFrames);
-		this.x=x;
-		this.y=y;
 		this.health=1;
 		this.damage=1;
-		this.vX=3;
-		this.vY=3;
 		
 	}
 

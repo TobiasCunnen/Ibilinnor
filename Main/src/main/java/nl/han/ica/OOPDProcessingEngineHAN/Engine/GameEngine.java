@@ -777,7 +777,8 @@ public abstract class GameEngine extends PApplet {
          * @param collidingGameobject
          * @return Vector
          */
-        private static Vector checkCollisionBetweenTileAndObject(GameObject gameObject, Tile tile, Rectangle collidingTile, Rectangle collidingGameobject) {
+      
+		private static Vector checkCollisionBetweenTileAndObject(GameObject gameObject, Tile tile, Rectangle collidingTile, Rectangle collidingGameobject) {
             Vector objects = new Vector();
 
             if (objectIsMoving(gameObject)) {
