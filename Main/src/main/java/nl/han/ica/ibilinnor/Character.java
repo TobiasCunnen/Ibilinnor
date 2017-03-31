@@ -25,7 +25,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		setX(x);
 		setY(y);
 		setFriction(0.10f);
-		//setGravity(0.5f);
+		setGravity(0.5f);
 	}
 
 	@Override

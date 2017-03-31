@@ -20,9 +20,6 @@ public class Slime extends Enemy implements ICollidableWithTiles {
 		setGravity(0.5f);
 		
 	}
-	
-	//ripped van waterworld player
-
 
 	@Override
 	public void update() {
