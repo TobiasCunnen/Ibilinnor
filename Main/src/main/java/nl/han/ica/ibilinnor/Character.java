@@ -23,10 +23,12 @@ public class Character extends AnimatedSpriteObject
 
 	private World world;
 	private Attack attack;
+	Sprite walkRight;
 
 	private ArrayList<Key> playerControl;
 
 	float jumpHeight;
+	char previousKey;
 
 	public Character(World world) {
 
@@ -34,6 +36,8 @@ public class Character extends AnimatedSpriteObject
 
 		this.world = world;
 		attack = new Attack(world);
+
+		walkRight = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_right_animation.gif");
 
 		playerControl = new ArrayList<>();
 
@@ -44,8 +48,8 @@ public class Character extends AnimatedSpriteObject
 
 		jumpHeight = 30;
 
-		setFriction(0.10f);
-		setGravity(0.5f);
+		setFriction(0.3f);
+		setGravity(1f);
 
 	}
 
@@ -53,6 +57,7 @@ public class Character extends AnimatedSpriteObject
 	public void update() {
 		updateOutOfBounds();
 		keyAction();
+		setAttackPosition();
 	}
 
 	private void updateOutOfBounds() {
@@ -78,15 +83,12 @@ public class Character extends AnimatedSpriteObject
 		for (Key key : playerControl) {
 			if (key.isPressedKey()) {
 
-				int speed = 4;
+				int speed = 6;
 				if (key.getKey() == 'a') {
 					setDirectionSpeed(270, speed);
-					setCurrentFrameIndex(0);
-
 				}
 				if (key.getKey() == 'd') {
 					setDirectionSpeed(90, speed);
-					setCurrentFrameIndex(0);
 				}
 				if (key.getKey() == ' ') {
 					setDirectionSpeed(0, jumpHeight);
@@ -95,9 +97,8 @@ public class Character extends AnimatedSpriteObject
 					sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
 					addGameObject();
 
-					Alarm alarm = new Alarm("hoi", 0.5);
+					Alarm alarm = new Alarm("attackAnimation", 0.5);
 					alarm.addTarget(this);
-
 					alarm.start();
 				}
 			}
@@ -105,9 +106,24 @@ public class Character extends AnimatedSpriteObject
 
 	}
 
+	private void setSpriteAnimation(char key) {
+		if (key != previousKey) {
+			previousKey=key;
+			if (key == 'a') {
+				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_left_animation.gif");
+			}
+			if (key == 'd') {
+				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_right_animation.gif");
+			}
+			if (key == ' '){
+				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/jump.png");
+			}
+		}
+	}
+
 	@Override
 	public void keyPressed(int keyCode, char key) {
-
+		setSpriteAnimation(key);
 		for (Key tempKey : playerControl) {
 			if (key == tempKey.getKey()) {
 				tempKey.setPressedKey(true);
@@ -122,6 +138,7 @@ public class Character extends AnimatedSpriteObject
 				tempKey.setPressedKey(false);
 			}
 		}
+		sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
 	}
 
 	@Override
@@ -130,7 +147,6 @@ public class Character extends AnimatedSpriteObject
 
 		for (CollidedTile ct : collidedTiles) {
 			if (ct.theTile instanceof GrassTile || ct.theTile instanceof GroundTile) {
-
 				if (ct.collisionSide == ct.TOP) {
 
 					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
@@ -186,10 +202,14 @@ public class Character extends AnimatedSpriteObject
 		world.deleteGameObject(attack);
 	}
 
+	public void setAttackPosition() {
+		attack.setX(this.getX() + attack.getWidth());
+		attack.setY(this.getY());
+	}
+
 	@Override
 	public void triggerAlarm(String alarmName) {
 		removeGameObject();
 		sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
-
 	}
 }
