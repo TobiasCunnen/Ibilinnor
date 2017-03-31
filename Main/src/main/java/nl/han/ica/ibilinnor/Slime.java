@@ -16,8 +16,8 @@ public class Slime extends Enemy implements ICollidableWithTiles {
 	static Sprite sprite=new Sprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
     private final World world;
 
-	public Slime(World world) {
-		super(sprite,1,20, 550);
+	public Slime(World world,int x,int y) {
+		super(sprite,1,x, y);
         this.world=world;
 		setFriction(0.10f);
 		
@@ -50,8 +50,7 @@ public class Slime extends Enemy implements ICollidableWithTiles {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 	
 	@Override

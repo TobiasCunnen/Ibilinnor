@@ -36,6 +36,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             setxSpeed(0);
             setX(0);
         }
+        System.out.println(getX());
         if (getY()<=0) {
             setySpeed(0);
             setY(0);
