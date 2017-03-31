@@ -84,7 +84,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
 			addGameObject();
 			
-			Alarm alarm = new Alarm("hoi", 0.3);
+			Alarm alarm = new Alarm("hoi", 0.5);
 			alarm.addTarget(this);
 
 			alarm.start();
@@ -158,6 +158,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 	@Override
 	public void triggerAlarm(String alarmName) {
 		removeGameObject();
+		sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
 		
 	}
 }
