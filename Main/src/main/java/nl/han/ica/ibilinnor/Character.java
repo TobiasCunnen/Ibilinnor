@@ -31,10 +31,27 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		attack = new Attack(world);
 	}
 
-	@Override
-	public void update() {
+    @Override
+    public void update() {
+        if (getX()<=0) {
+            setxSpeed(0);
+            setX(0);
+        }
+     
+        if (getY()<=0) {
+            setySpeed(0);
+            setY(0);
+        }
+        if (getX()>=world.getWidth()-getWidth()) {
+            setxSpeed(0);
+            setX(world.getWidth() - getWidth());
+        }
+        if (getY()>=world.getHeight()-getHeight()) {
+            setySpeed(0);
+            setY(world.getHeight() - getHeight());
+        }
 
-	}
+    }
 
 	@Override
 	public void keyPressed(int keyCode, char key) {
