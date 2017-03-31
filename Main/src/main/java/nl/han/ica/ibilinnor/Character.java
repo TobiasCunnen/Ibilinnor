@@ -108,14 +108,14 @@ public class Character extends AnimatedSpriteObject
 
 	private void setSpriteAnimation(char key) {
 		if (key != previousKey) {
-			previousKey=key;
+			previousKey = key;
 			if (key == 'a') {
 				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_left_animation.gif");
 			}
 			if (key == 'd') {
 				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_right_animation.gif");
 			}
-			if (key == ' '){
+			if (key == ' ') {
 				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/jump.png");
 			}
 		}
@@ -138,7 +138,10 @@ public class Character extends AnimatedSpriteObject
 				tempKey.setPressedKey(false);
 			}
 		}
-		sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
+		if (key == previousKey) {
+			previousKey = '1';
+			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
+		}
 	}
 
 	@Override
