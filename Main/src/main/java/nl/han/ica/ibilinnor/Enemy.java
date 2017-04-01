@@ -6,6 +6,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Collision.CollidedTile;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithTiles;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.AnimatedSpriteObject;
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;
@@ -16,10 +17,11 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 	protected int health;
 	protected int damage;
 	private boolean isAlive;
+	protected World world;
 	
-	public Enemy(Sprite sprite, int totalFrames) {
+	public Enemy(World world,Sprite sprite, int totalFrames) {
 		super(sprite, totalFrames);
-		
+		this.world=world;
 		this.health=1;
 		this.damage=1;
 		this.isAlive = true;
@@ -47,6 +49,16 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles)  {
 
     }
+	@Override
+	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+		for (GameObject co : collidedGameObjects) {
+			if (co instanceof Attack) {
+				world.deleteGameObject(this);
+				setAlive(false);
+			}
+		}
+
+	}
 
 	public boolean isAlive() {
 		return isAlive;

@@ -13,10 +13,8 @@ public class Slime extends Enemy {
 
 	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
 
-	private World world;
-
 	public Slime(World world) {
-		super(sprite, 1);
+		super(world,sprite, 1);
 		this.world = world;
 		setFriction(0.10f);
 		setGravity(0.5f);
@@ -42,16 +40,5 @@ public class Slime extends Enemy {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-		for (GameObject co : collidedGameObjects) {
-			if (co instanceof Attack) {
-				world.deleteGameObject(this);
-				setAlive(false);
-			}
-		}
-
 	}
 }
