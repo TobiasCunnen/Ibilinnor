@@ -1,5 +1,7 @@
 package nl.han.ica.ibilinnor;
 
+import java.util.ArrayList;
+
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
@@ -12,7 +14,7 @@ import processing.core.PApplet;
 
 public class World extends GameEngine {
 	
-	private Enemy slime;
+	private ArrayList<EnemySpawner> enemySpawn;
 	private Character player;
 
 	public static void main(String[] args) {
@@ -30,6 +32,10 @@ public class World extends GameEngine {
 		int worldWidth = 1600;
 		int worldHeight = 800;
 		
+		player = new Character(this);
+		enemySpawn = new ArrayList<>();
+		enemySpawn.add(new EnemySpawner(this,new Slime(this),420,100));
+		enemySpawn.add(new EnemySpawner(this,new Snail(this),1400,200));
 
 		initializeTileMap();
 		
@@ -47,11 +53,6 @@ public class World extends GameEngine {
 	}
 	
     private void createObjects() {
-        slime=new Slime(this);
-        addGameObject(slime,420,160); 
-        player = new Character(this);
-        addGameObject(player,25,560);
-
     }
 
 

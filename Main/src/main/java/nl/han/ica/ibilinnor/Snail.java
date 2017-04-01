@@ -9,13 +9,13 @@ import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;
 import processing.core.PVector;
 
-public class Slime extends Enemy {
+public class Snail extends Enemy {
 
-	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/slime/idle_animation.gif");
+	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/Snail/idle.png");
 
 	private World world;
 
-	public Slime(World world) {
+	public Snail(World world) {
 		super(sprite, 1);
 		this.world = world;
 		setFriction(0.10f);

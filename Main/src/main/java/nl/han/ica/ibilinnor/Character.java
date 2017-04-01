@@ -16,14 +16,12 @@ import nl.han.ica.ibilinnor.tiles.GroundTile;
 import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PVector;
 
-public class Character extends AnimatedSpriteObject
-		implements ICollidableWithTiles, ICollidableWithGameObjects, IAlarmListener {
+public class Character extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects, IAlarmListener {
 
 	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
 
 	private World world;
 	private Attack attack;
-	Sprite walkRight;
 
 	private ArrayList<Key> playerControl;
 
@@ -35,9 +33,8 @@ public class Character extends AnimatedSpriteObject
 		super(sprite, 1);
 
 		this.world = world;
+		addGameObjectCharacter();
 		attack = new Attack(world);
-
-		walkRight = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_right_animation.gif");
 
 		playerControl = new ArrayList<>();
 
@@ -82,7 +79,7 @@ public class Character extends AnimatedSpriteObject
 	private void keyAction() {
 		for (Key key : playerControl) {
 			if (key.isPressedKey()) {
-
+				
 				int speed = 6;
 				if (key.getKey() == 'a') {
 					setDirectionSpeed(270, speed);
@@ -95,7 +92,7 @@ public class Character extends AnimatedSpriteObject
 				}
 				if (key.getKey() == 'j') {
 					sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
-					addGameObject();
+					addGameObjectAttack();
 
 					Alarm alarm = new Alarm("attackAnimation", 0.5);
 					alarm.addTarget(this);
@@ -141,6 +138,12 @@ public class Character extends AnimatedSpriteObject
 		if (key == previousKey) {
 			previousKey = '1';
 			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
+		}
+	}
+
+	private void realeaseAllKeys() {
+		for (Key tempKey : playerControl) {
+			tempKey.setPressedKey(false);
 		}
 	}
 
@@ -191,11 +194,16 @@ public class Character extends AnimatedSpriteObject
 		for (GameObject co : collidedGameObjects) {
 			if (co instanceof Enemy) {
 				world.deleteGameObject(this);
+				realeaseAllKeys();
+
+				Alarm alarm = new Alarm("respawn", 3);
+				alarm.addTarget(this);
+				alarm.start();
 			}
 		}
 	}
 
-	public void addGameObject() {
+	public void addGameObjectAttack() {
 
 		world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
 
@@ -205,6 +213,10 @@ public class Character extends AnimatedSpriteObject
 		world.deleteGameObject(attack);
 	}
 
+	public void addGameObjectCharacter() {
+		world.addGameObject(this, 25, 560);
+	}
+
 	public void setAttackPosition() {
 		attack.setX(this.getX() + attack.getWidth());
 		attack.setY(this.getY());
@@ -212,7 +224,12 @@ public class Character extends AnimatedSpriteObject
 
 	@Override
 	public void triggerAlarm(String alarmName) {
-		removeGameObject();
-		sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
+		if (alarmName == "attackAnimation") {
+			removeGameObject();
+			sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
+		}
+		if (alarmName == "respawn") {
+			addGameObjectCharacter();
+		}
 	}
 }

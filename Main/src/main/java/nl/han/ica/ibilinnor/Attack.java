@@ -25,12 +25,6 @@ public class Attack extends AnimatedSpriteObject implements ICollidableWithGameO
 
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-		for (GameObject co : collidedGameObjects) {
-			if (co instanceof Enemy) {
-				world.deleteGameObject(co);
-			}
-		}
-		
 	}
 
 }
