@@ -16,7 +16,8 @@ import nl.han.ica.ibilinnor.tiles.GroundTile;
 import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PVector;
 
-public class Character extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects, IAlarmListener {
+public class Character extends AnimatedSpriteObject
+		implements ICollidableWithTiles, ICollidableWithGameObjects, IAlarmListener {
 
 	static Sprite sprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/idle_animation.gif");
 
@@ -25,8 +26,9 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 
 	private ArrayList<Key> playerControl;
 
-	float jumpHeight;
-	char previousKey;
+	private float jumpHeight;
+	private char previousKey;
+	private boolean allowJump;
 
 	public Character(World world) {
 
@@ -37,16 +39,16 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		attack = new Attack(world);
 
 		playerControl = new ArrayList<>();
-
 		playerControl.add(new Key('a'));
 		playerControl.add(new Key('d'));
 		playerControl.add(new Key(' '));
 		playerControl.add(new Key('j'));
 
-		jumpHeight = 30;
+		this.jumpHeight = 100;
+		this.allowJump = true;
 
 		setFriction(0.3f);
-		setGravity(1f);
+		setGravity(2f);
 
 	}
 
@@ -79,7 +81,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 	private void keyAction() {
 		for (Key key : playerControl) {
 			if (key.isPressedKey()) {
-				
+
 				int speed = 6;
 				if (key.getKey() == 'a') {
 					setDirectionSpeed(270, speed);
@@ -87,16 +89,16 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 				if (key.getKey() == 'd') {
 					setDirectionSpeed(90, speed);
 				}
-				if (key.getKey() == ' ') {
+				if (key.getKey() == ' ' && allowJump) {
 					setDirectionSpeed(0, jumpHeight);
+					startAlarm("jump", 1);
+					allowJump = false;
 				}
 				if (key.getKey() == 'j') {
 					sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
 					addGameObjectAttack();
 
-					Alarm alarm = new Alarm("attackAnimation", 0.5);
-					alarm.addTarget(this);
-					alarm.start();
+					startAlarm("attackAnimation", 0.5f);
 				}
 			}
 		}
@@ -112,7 +114,7 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 			if (key == 'd') {
 				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/walk_right_animation.gif");
 			}
-			if (key == ' ') {
+			if (key == ' ' && allowJump) {
 				sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/jump.png");
 			}
 		}
@@ -222,6 +224,12 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		attack.setY(this.getY());
 	}
 
+	private void startAlarm(String name, float time) {
+		Alarm alarm = new Alarm(name, time);
+		alarm.addTarget(this);
+		alarm.start();
+	}
+
 	@Override
 	public void triggerAlarm(String alarmName) {
 		if (alarmName == "attackAnimation") {
@@ -230,6 +238,9 @@ public class Character extends AnimatedSpriteObject implements ICollidableWithTi
 		}
 		if (alarmName == "respawn") {
 			addGameObjectCharacter();
+		}
+		if (alarmName == "jump") {
+			allowJump = true;
 		}
 	}
 }
