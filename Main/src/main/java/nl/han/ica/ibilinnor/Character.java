@@ -44,7 +44,7 @@ public class Character extends AnimatedSpriteObject
 		playerControl.add(new Key(' '));
 		playerControl.add(new Key('j'));
 
-		this.jumpHeight = 100;
+		this.jumpHeight = 110;
 		this.allowJump = true;
 
 		setFriction(0.3f);
