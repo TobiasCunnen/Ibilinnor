@@ -3,7 +3,6 @@ package nl.han.ica.ibilinnor;
 import java.util.List;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.CollidedTile;
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;

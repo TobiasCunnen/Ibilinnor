@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
+import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileMap;
 import nl.han.ica.OOPDProcessingEngineHAN.Tile.TileType;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
@@ -13,58 +14,71 @@ import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PApplet;
 
 public class World extends GameEngine {
-	
+
 	private Character player;
 	private ArrayList<EnemySpawner> enemySpawn;
 	private Flag flag;
 	protected KillObjective objective;
 	private TextObject text;
+	private Sound backgroundSound;
 
 	public static void main(String[] args) {
-        PApplet.main(new String[]{"nl.han.ica.ibilinnor.World"});
+		PApplet.main(new String[] { "nl.han.ica.ibilinnor.World" });
 
 	}
 
 	@Override
-	public void setupGame(){
+	public void setupGame() {
 
 		int worldWidth = 1600;
 		int worldHeight = 800;
-		
+
 		player = new Character(this);
-		
+
 		enemySpawn = new ArrayList<>();
-		enemySpawn.add(new EnemySpawner(this,new Slime(this),1510,81));
-		enemySpawn.add(new EnemySpawner(this,new Slime(this),530,641));
-		enemySpawn.add(new EnemySpawner(this,new Slime(this),1180,241));
-		enemySpawn.add(new EnemySpawner(this,new Snail(this),885,641));
-		enemySpawn.add(new EnemySpawner(this,new Snail(this),330,161));
+		enemySpawn.add(new EnemySpawner(this, new Slime(this), 1510, 81));
+		enemySpawn.add(new EnemySpawner(this, new Slime(this), 530, 641));
+		enemySpawn.add(new EnemySpawner(this, new Slime(this), 1180, 241));
+		enemySpawn.add(new EnemySpawner(this, new Snail(this), 885, 641));
+		enemySpawn.add(new EnemySpawner(this, new Snail(this), 330, 161));
 
 		flag = new Flag(this);
 		objective = new KillObjective(enemySpawn.size());
+		text = new TextObject(this, objective.getKills() + " out of " + objective.getNumberOfKills() + " kills",worldWidth, 100);
 		
+		initializeSound();
 		initializeTileMap();
-		text=new TextObject(this,objective.getKills()+" out of "+objective.getNumberOfKills()+" kills",worldWidth,100);
 		createObjects();
-		
 		createView(worldWidth, worldHeight);
 
 	}
 
 	@Override
 	public void update() {
-		//System.out.println(player.getX());
-		//System.out.println(player.getY());
-		for(EnemySpawner a:enemySpawn){
+		// System.out.println(player.getX());
+		// System.out.println(player.getY());
+		for (EnemySpawner a : enemySpawn) {
 			a.updateTimer();
 		}
-		text.setText(objective.getKills()+" out of "+objective.getNumberOfKills()+" kills");
+		if (objective.checkVictory()) {
+			if(!flag.isVisible()){
+			text.setText("Find the flag");
+			}else{
+				text.setText("Victory!");
+			}
+		} else {
+			text.setText(objective.getKills() + " out of " + objective.getNumberOfKills() + " kills");
+		}
 	}
-	
-    private void createObjects() {
-    	addGameObject(flag,1550,660);
-    }
 
+	private void createObjects() {
+		addGameObject(flag, 1550, 660);
+	}
+
+	private void initializeSound() {
+		backgroundSound = new Sound(this, "src/main/java/nl/han/ica/ibilinnor/media/EcstasyOfGold.mp3");
+		backgroundSound.loop(-1);
+	}
 
 	private void initializeTileMap() {
 		Sprite grassSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/grassTile.png");
@@ -76,18 +90,16 @@ public class World extends GameEngine {
 
 		TileType[] tileTypes = { grassTileType, groundTileType, secretTileType };
 		int tileSize = 80;
-		int tilesMap[][] = { 
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1 },
-				{-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0},
-				{-1,-1,-1,0,0,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,0,1,1},
-				{0,0,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,0,0,1,1,1,1},
-				{-1,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,0,-1,1,1,1,1,1,1},
-				{-1,-1,0,-1,-1,-1,-1,-1,-1,1,0,-1,1,-1,2,2,2,2,2,2},
-				{-1,-1,-1,-1,0,-1,-1,-1,-1,2,2,-1,1,-1,2,2,2,2,2,2},
-				{0,-1,-1,-1,1,-1,-1,-1,-1,2,2,-1,1,-1,2,2,2,2,2,2},
-				{1,0,0,0,1,0,0,0,0,1,1,0,1,0,1,1,1,1,1,1}
-				};
+		int tilesMap[][] = { { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
+				{ -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0 },
+				{ -1, -1, -1, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 1, 1 },
+				{ 0, 0, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 0, 0, 1, 1, 1, 1 },
+				{ -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, 0, -1, 1, 1, 1, 1, 1, 1 },
+				{ -1, -1, 0, -1, -1, -1, -1, -1, -1, 1, 0, -1, 1, -1, 2, 2, 2, 2, 2, 2 },
+				{ -1, -1, -1, -1, 0, -1, -1, -1, -1, 2, 2, -1, 1, -1, 2, 2, 2, 2, 2, 2 },
+				{ 0, -1, -1, -1, 1, -1, -1, -1, -1, 2, 2, -1, 1, -1, 2, 2, 2, 2, 2, 2 },
+				{ 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1 } };
 		tileMap = new TileMap(tileSize, tileTypes, tilesMap);
 	}
 
