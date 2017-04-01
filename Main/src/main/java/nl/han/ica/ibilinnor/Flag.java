@@ -7,21 +7,22 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
-public class Flag extends SpriteObject implements ICollidableWithGameObjects{
-	
+public class Flag extends SpriteObject implements ICollidableWithGameObjects {
+
 	private World world;
 	private Firework firework;
-	
 
 	public Flag(World world) {
-		super( new Sprite("src/main/java/nl/han/ica/ibilinnor/media/flag.png"));
-		this.world=world;
-		this.firework= new Firework();
+		super(new Sprite("src/main/java/nl/han/ica/ibilinnor/media/flag.png"));
+		this.world = world;
+		this.firework = new Firework();
 		this.setVisible(false);
 	}
-	
-	private void victory(){
-		world.addGameObject(firework,600,10);
+
+	private void victory() {
+		if (world.objective.checkVictory()) {
+			world.addGameObject(firework, 600, 10);
+		}
 	}
 
 	@Override
@@ -32,12 +33,12 @@ public class Flag extends SpriteObject implements ICollidableWithGameObjects{
 				victory();
 			}
 		}
-		
+
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

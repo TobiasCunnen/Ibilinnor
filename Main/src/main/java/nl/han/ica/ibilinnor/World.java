@@ -17,7 +17,7 @@ public class World extends GameEngine {
 	private Character player;
 	private ArrayList<EnemySpawner> enemySpawn;
 	private Flag flag;
-	protected KillObjective killObjective;
+	protected KillObjective objective;
 
 	public static void main(String[] args) {
         PApplet.main(new String[]{"nl.han.ica.ibilinnor.World"});
@@ -44,7 +44,7 @@ public class World extends GameEngine {
 		enemySpawn.add(new EnemySpawner(this,new Snail(this),330,161));
 
 		flag = new Flag(this);
-		killObjective = new KillObjective(enemySpawn.size());
+		objective = new KillObjective(enemySpawn.size());
 		
 		initializeTileMap();
 		

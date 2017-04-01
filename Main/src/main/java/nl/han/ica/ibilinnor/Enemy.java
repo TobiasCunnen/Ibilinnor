@@ -55,6 +55,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 			if (co instanceof Attack) {
 				world.deleteGameObject(this);
 				setAlive(false);
+				world.objective.addKill();
 			}
 		}
 

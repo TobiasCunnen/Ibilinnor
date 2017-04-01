@@ -12,6 +12,7 @@ public class KillObjective implements IObjective {
 	
 	public void addKill(){
 		this.kills++;
+		System.out.println(kills);
 	}
 
 	@Override
@@ -21,8 +22,12 @@ public class KillObjective implements IObjective {
 	}
 
 	@Override
-	public void checkVictory() {
-		// TODO Auto-generated method stub
+	public boolean checkVictory() {
+		if(this.kills==this.numberOfKills){
+			return true;
+		}else{
+			return false;
+		}
 		
 	}
 

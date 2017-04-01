@@ -3,8 +3,8 @@ package nl.han.ica.ibilinnor;
 public interface IObjective {
 
 
-public void drawObjective();
+public abstract void drawObjective();
 
-public void checkVictory();
+public abstract boolean checkVictory();
 
 }
