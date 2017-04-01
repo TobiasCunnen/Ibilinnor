@@ -20,6 +20,7 @@ public class Snail extends Enemy {
 		this.world = world;
 		setFriction(0.10f);
 		setGravity(0.5f);
+		
 
 	}
 

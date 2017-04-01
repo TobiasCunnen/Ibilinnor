@@ -33,9 +33,13 @@ public class World extends GameEngine {
 		int worldHeight = 800;
 		
 		player = new Character(this);
+		
 		enemySpawn = new ArrayList<>();
-		enemySpawn.add(new EnemySpawner(this,new Slime(this),420,100));
-		enemySpawn.add(new EnemySpawner(this,new Snail(this),1400,200));
+		enemySpawn.add(new EnemySpawner(this,new Slime(this),1510,81));
+		enemySpawn.add(new EnemySpawner(this,new Slime(this),530,641));
+		enemySpawn.add(new EnemySpawner(this,new Slime(this),1180,241));
+		enemySpawn.add(new EnemySpawner(this,new Snail(this),885,641));
+		enemySpawn.add(new EnemySpawner(this,new Snail(this),330,161));
 
 		initializeTileMap();
 		
@@ -49,6 +53,9 @@ public class World extends GameEngine {
 	public void update() {
 		//System.out.println(player.getX());
 		//System.out.println(player.getY());
+		for(EnemySpawner a:enemySpawn){
+			a.updateTimer();
+		}
 
 	}
 	
