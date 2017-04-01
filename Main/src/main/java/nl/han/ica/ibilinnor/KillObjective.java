@@ -12,7 +12,6 @@ public class KillObjective implements IObjective {
 	
 	public void addKill(){
 		this.kills++;
-		System.out.println(kills);
 	}
 
 	@Override
@@ -23,12 +22,27 @@ public class KillObjective implements IObjective {
 
 	@Override
 	public boolean checkVictory() {
-		if(this.kills==this.numberOfKills){
+		if(this.kills>=this.numberOfKills){
 			return true;
 		}else{
 			return false;
 		}
-		
+	}
+
+	public int getKills() {
+		return kills;
+	}
+
+	public void setKills(int kills) {
+		this.kills = kills;
+	}
+
+	public int getNumberOfKills() {
+		return numberOfKills;
+	}
+
+	public void setNumberOfKills(int numberOfKills) {
+		this.numberOfKills = numberOfKills;
 	}
 
 }

@@ -18,6 +18,7 @@ public class World extends GameEngine {
 	private ArrayList<EnemySpawner> enemySpawn;
 	private Flag flag;
 	protected KillObjective objective;
+	private TextObject text;
 
 	public static void main(String[] args) {
         PApplet.main(new String[]{"nl.han.ica.ibilinnor.World"});
@@ -26,10 +27,6 @@ public class World extends GameEngine {
 
 	@Override
 	public void setupGame(){
-		setupWorld();
-	}
-	
-	public void setupWorld() {
 
 		int worldWidth = 1600;
 		int worldHeight = 800;
@@ -47,7 +44,7 @@ public class World extends GameEngine {
 		objective = new KillObjective(enemySpawn.size());
 		
 		initializeTileMap();
-		
+		text=new TextObject(this,objective.getKills()+" out of "+objective.getNumberOfKills()+" kills",worldWidth,100);
 		createObjects();
 		
 		createView(worldWidth, worldHeight);
@@ -61,7 +58,7 @@ public class World extends GameEngine {
 		for(EnemySpawner a:enemySpawn){
 			a.updateTimer();
 		}
-
+		text.setText(objective.getKills()+" out of "+objective.getNumberOfKills()+" kills");
 	}
 	
     private void createObjects() {
@@ -101,5 +98,4 @@ public class World extends GameEngine {
 		setView(view);
 		size(screenWidth, screenHeight);
 	}
-
 }
