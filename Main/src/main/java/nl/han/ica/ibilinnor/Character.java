@@ -61,6 +61,10 @@ public class Character extends AnimatedSpriteObject
 		setAttackPosition();
 	}
 
+	/**
+	 * relocates the Character when he goes out of bounds to make sure he stays
+	 * in the picture
+	 */
 	private void updateOutOfBounds() {
 		if (getX() <= 0) {
 			setxSpeed(0);
@@ -80,6 +84,9 @@ public class Character extends AnimatedSpriteObject
 		}
 	}
 
+	/**
+	 * decides which action to take after pressing a key
+	 */
 	private void keyAction() {
 		for (Key key : playerControl) {
 			if (key.isPressedKey()) {
@@ -113,6 +120,11 @@ public class Character extends AnimatedSpriteObject
 
 	}
 
+	/**
+	 * Different spites are loaded when a key is pressed
+	 * 
+	 * @param key
+	 */
 	private void setSpriteAnimation(char key) {
 		if (key != previousKey) {
 			previousKey = key;
@@ -151,6 +163,9 @@ public class Character extends AnimatedSpriteObject
 		}
 	}
 
+	/**
+	 * sets all pressedKey values on false
+	 */
 	private void realeaseAllKeys() {
 		for (Key tempKey : playerControl) {
 			tempKey.setPressedKey(false);
@@ -213,36 +228,59 @@ public class Character extends AnimatedSpriteObject
 		}
 	}
 
+	/**
+	 * adds a game object which draws the attack animation in front of the
+	 * player
+	 * 
+	 * @param key
+	 */
 	private void addGameObjectAttack(char key) {
 
 		if (key == 'k') {
 			world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
-			attackKey=key;
-		}if (key == 'j') {
+			attackKey = key;
+		}
+		if (key == 'j') {
 			world.addGameObject(attack, this.getX() - attack.getWidth(), this.getY());
-			attackKey=key;
+			attackKey = key;
 		}
 
 	}
 
+	/**
+	 * removes the attack game object
+	 */
 	private void removeGameObject() {
 		world.deleteGameObject(attack);
 	}
 
+	/**
+	 * adds the player to the game object list
+	 */
 	private void addGameObjectCharacter() {
 		world.addGameObject(this, 25, 560);
 	}
 
+	/**
+	 * sets the position of the attack object relative to the characters
+	 * position
+	 */
 	private void setAttackPosition() {
-		if(attackKey=='k'){
-		attack.setX(this.getX() + attack.getWidth());
-		attack.setY(this.getY());
-		}else if(attackKey=='j'){
+		if (attackKey == 'k') {
+			attack.setX(this.getX() + attack.getWidth());
+			attack.setY(this.getY());
+		} else if (attackKey == 'j') {
 			attack.setX(this.getX() - attack.getWidth());
-			attack.setY(this.getY());	
+			attack.setY(this.getY());
 		}
 	}
 
+	/**
+	 * makes an alarm so that we can set a timer on certain actions
+	 * 
+	 * @param name
+	 * @param time
+	 */
 	private void startAlarm(String name, float time) {
 		Alarm alarm = new Alarm(name, time);
 		alarm.addTarget(this);

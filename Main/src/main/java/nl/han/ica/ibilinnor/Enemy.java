@@ -9,6 +9,9 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.AnimatedSpriteObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Sound.Sound;
+import nl.han.ica.ibilinnor.tiles.GrassTile;
+import nl.han.ica.ibilinnor.tiles.GroundTile;
+import processing.core.PVector;
 
 public abstract class Enemy extends AnimatedSpriteObject implements ICollidableWithTiles,ICollidableWithGameObjects {
 	
@@ -29,9 +32,21 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 	}
 
 	@Override
-    public void tileCollisionOccurred(List<CollidedTile> collidedTiles)  {
+	public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
+		PVector vector;
 
-    }
+		for (CollidedTile ct : collidedTiles) {
+			if (ct.theTile instanceof GrassTile || ct.theTile instanceof GroundTile){
+				
+				if (ct.collisionSide == ct.TOP){
+
+					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
+					setY(vector.y - height);
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject co : collidedGameObjects) {

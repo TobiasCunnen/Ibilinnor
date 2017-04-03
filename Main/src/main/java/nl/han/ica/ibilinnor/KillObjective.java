@@ -15,20 +15,35 @@ public class KillObjective implements IObjective, IAlarmListener {
 		this.allowKill = true;
 	}
 
+	/**
+	 * increases the number of kills by one
+	 */
 	public void addKill() {
 		if (allowKill) {
-			this.kills=kills+1;
+			this.kills++;
 			allowKill = false;
 			startAlarm("addKill", 0.1f);
 		}
 	}
 
+	/**
+	 * makes an alarm so that we can set a timer on certain actions
+	 * 
+	 * @param name
+	 * @param time
+	 */
 	private void startAlarm(String name, float time) {
 		Alarm alarm = new Alarm(name, time);
 		alarm.addTarget(this);
 		alarm.start();
 	}
 
+	/**
+	 * checks if the number of kills is equal or greater then the required
+	 * numberOfKills.
+	 * 
+	 * @return  If the condition has been met then return true. Else return false.
+	 */
 	@Override
 	public boolean checkVictory() {
 		if (this.kills >= this.numberOfKills) {

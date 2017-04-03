@@ -21,6 +21,9 @@ public class Flag extends SpriteObject implements ICollidableWithGameObjects {
 		this.setVisible(false);
 	}
 
+	/**
+	 * checks if the objective has been completed so that the flag can be shown
+	 */
 	private void victory() {
 		if (world.objective.checkVictory()) {
 			firework.setVisible(true);

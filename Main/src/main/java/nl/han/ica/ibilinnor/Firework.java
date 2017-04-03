@@ -17,6 +17,12 @@ public class Firework extends AnimatedSpriteObject implements IAlarmListener {
 	public void update() {
 	}
 	
+	/**
+	 * makes an alarm so that we can set a timer on certain actions
+	 * 
+	 * @param name
+	 * @param time
+	 */
 	private void startAlarm() {
 		Alarm alarm = new Alarm("next frame", 0.2);
 		alarm.addTarget(this);

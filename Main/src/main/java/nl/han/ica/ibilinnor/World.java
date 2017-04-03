@@ -44,8 +44,9 @@ public class World extends GameEngine {
 
 		flag = new Flag(this);
 		objective = new KillObjective(enemySpawn.size());
-		text = new TextObject(this, objective.getKills() + " out of " + objective.getNumberOfKills() + " kills",worldWidth, 100);
-		
+		text = new TextObject(this, objective.getKills() + " out of " + objective.getNumberOfKills() + " kills",
+				worldWidth, 100);
+
 		initializeSound();
 		initializeTileMap();
 		createObjects();
@@ -59,18 +60,25 @@ public class World extends GameEngine {
 		updateSpawnerTimer();
 		updateObjectiveText();
 	}
-	
-	private void updateSpawnerTimer(){
+
+	/**
+	 * calls on the methode updateTimer for all the EnemySpawners in the
+	 * arraylist
+	 */
+	private void updateSpawnerTimer() {
 		for (EnemySpawner es : enemySpawn) {
 			es.updateTimer();
 		}
 	}
-	
-	private  void updateObjectiveText(){
+
+	/**
+	 * updates the text to the objective that is at hand
+	 */
+	private void updateObjectiveText() {
 		if (objective.checkVictory()) {
-			if(!flag.isVisible()){
-			text.setText("Find the flag");
-			}else{
+			if (!flag.isVisible()) {
+				text.setText("Find the flag");
+			} else {
 				text.setText("Victory!");
 			}
 		} else {
@@ -78,15 +86,24 @@ public class World extends GameEngine {
 		}
 	}
 
+	/**
+	 * adds a game object to the list
+	 */
 	private void createObjects() {
 		addGameObject(flag, 1550, 660);
 	}
 
+	/**
+	 * sets the background music and loops it
+	 */
 	private void initializeSound() {
 		backgroundSound = new Sound(this, "src/main/java/nl/han/ica/ibilinnor/media/EcstasyOfGold.mp3");
 		backgroundSound.loop(-1);
 	}
 
+	/**
+	 * creates the map with all the diffrent tiles
+	 */
 	private void initializeTileMap() {
 		Sprite grassSprite = new Sprite("src/main/java/nl/han/ica/ibilinnor/media/grassTile.png");
 		TileType<GrassTile> grassTileType = new TileType<>(GrassTile.class, grassSprite);
@@ -110,6 +127,12 @@ public class World extends GameEngine {
 		tileMap = new TileMap(tileSize, tileTypes, tilesMap);
 	}
 
+	/**
+	 * sets the worldheigt and width and draws it with the background
+	 * 
+	 * @param screenWidth
+	 * @param screenHeight
+	 */
 	private void createView(int screenWidth, int screenHeight) {
 		View view = new View(screenWidth, screenHeight);
 		view.setBackground(loadImage("src/main/java/nl/han/ica/ibilinnor/media/background.png"));

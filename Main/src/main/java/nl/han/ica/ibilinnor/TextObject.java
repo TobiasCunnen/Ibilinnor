@@ -32,6 +32,12 @@ public class TextObject extends GameObject {
 		g.text(text, getX(), getY());
 	}
 	
+    /**
+     * creates a dashboard that we use to draw the text
+     * 
+     * @param dashboardWidth
+     * @param dashboardHeight
+     */
     private void createDashboard(int dashboardWidth,int dashboardHeight) {
         Dashboard dashboard = new Dashboard(0,0, dashboardWidth, dashboardHeight);
         dashboard.addGameObject(this);

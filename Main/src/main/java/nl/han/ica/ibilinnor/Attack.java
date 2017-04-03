@@ -15,7 +15,6 @@ public class Attack extends AnimatedSpriteObject implements ICollidableWithGameO
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 
 	}
 
