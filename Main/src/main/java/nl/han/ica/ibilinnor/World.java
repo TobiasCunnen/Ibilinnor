@@ -55,11 +55,18 @@ public class World extends GameEngine {
 
 	@Override
 	public void update() {
-		// System.out.println(player.getX());
-		// System.out.println(player.getY());
-		for (EnemySpawner a : enemySpawn) {
-			a.updateTimer();
+
+		updateSpawnerTimer();
+		updateObjectiveText();
+	}
+	
+	private void updateSpawnerTimer(){
+		for (EnemySpawner es : enemySpawn) {
+			es.updateTimer();
 		}
+	}
+	
+	private  void updateObjectiveText(){
 		if (objective.checkVictory()) {
 			if(!flag.isVisible()){
 			text.setText("Find the flag");

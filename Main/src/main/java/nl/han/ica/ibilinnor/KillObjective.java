@@ -1,30 +1,45 @@
 package nl.han.ica.ibilinnor;
 
-public class KillObjective implements IObjective {
-	
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
+import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
+
+public class KillObjective implements IObjective, IAlarmListener {
+
 	private int kills;
 	private int numberOfKills;
-	
-	public KillObjective(int numberOfKills){
-		this.numberOfKills=numberOfKills;
-		this.kills=0;
+	private boolean allowKill;
+
+	public KillObjective(int numberOfKills) {
+		this.numberOfKills = numberOfKills;
+		this.kills = 0;
+		this.allowKill = true;
 	}
-	
-	public void addKill(){
-		this.kills++;
+
+	public void addKill() {
+		if (allowKill) {
+			this.kills=kills+1;
+			allowKill = false;
+			startAlarm("addKill", 0.1f);
+		}
+	}
+
+	private void startAlarm(String name, float time) {
+		Alarm alarm = new Alarm(name, time);
+		alarm.addTarget(this);
+		alarm.start();
 	}
 
 	@Override
 	public void drawObjective() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean checkVictory() {
-		if(this.kills>=this.numberOfKills){
+		if (this.kills >= this.numberOfKills) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -43,6 +58,14 @@ public class KillObjective implements IObjective {
 
 	public void setNumberOfKills(int numberOfKills) {
 		this.numberOfKills = numberOfKills;
+	}
+
+	@Override
+	public void triggerAlarm(String alarmName) {
+		if (alarmName == "addKill") {
+			allowKill = true;
+		}
+
 	}
 
 }

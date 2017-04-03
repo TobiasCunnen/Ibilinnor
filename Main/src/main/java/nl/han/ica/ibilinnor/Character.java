@@ -29,6 +29,7 @@ public class Character extends AnimatedSpriteObject
 	private float jumpHeight;
 	private char previousKey;
 	private boolean allowJump;
+	private char attackKey;
 
 	public Character(World world) {
 
@@ -43,6 +44,7 @@ public class Character extends AnimatedSpriteObject
 		playerControl.add(new Key('d'));
 		playerControl.add(new Key(' '));
 		playerControl.add(new Key('j'));
+		playerControl.add(new Key('k'));
 
 		this.jumpHeight = 110;
 		this.allowJump = true;
@@ -96,7 +98,13 @@ public class Character extends AnimatedSpriteObject
 				}
 				if (key.getKey() == 'j') {
 					sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
-					addGameObjectAttack();
+					addGameObjectAttack('j');
+
+					startAlarm("attackAnimation", 0.5f);
+				}
+				if (key.getKey() == 'k') {
+					sprite.setSprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_animation.gif");
+					addGameObjectAttack('k');
 
 					startAlarm("attackAnimation", 0.5f);
 				}
@@ -205,9 +213,15 @@ public class Character extends AnimatedSpriteObject
 		}
 	}
 
-	public void addGameObjectAttack() {
+	public void addGameObjectAttack(char key) {
 
-		world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
+		if (key == 'k') {
+			world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
+			attackKey=key;
+		}if (key == 'j') {
+			world.addGameObject(attack, this.getX() - attack.getWidth(), this.getY());
+			attackKey=key;
+		}
 
 	}
 
@@ -220,8 +234,13 @@ public class Character extends AnimatedSpriteObject
 	}
 
 	public void setAttackPosition() {
+		if(attackKey=='k'){
 		attack.setX(this.getX() + attack.getWidth());
 		attack.setY(this.getY());
+		}else if(attackKey=='j'){
+			attack.setX(this.getX() - attack.getWidth());
+			attack.setY(this.getY());	
+		}
 	}
 
 	private void startAlarm(String name, float time) {

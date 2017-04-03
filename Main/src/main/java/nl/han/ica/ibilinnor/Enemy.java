@@ -28,23 +28,6 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 		
 	}
 
-	public void walkLeft(){
-		
-	}
-	
-	public void walkRight(){
-		
-	}
-	
-	public void die(){
-		
-	}
-	
-	public void takeDamage(){
-		
-	}
-	
-
 	@Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles)  {
 
