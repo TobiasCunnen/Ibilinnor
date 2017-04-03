@@ -8,13 +8,9 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 
 public class Attack extends AnimatedSpriteObject implements ICollidableWithGameObjects {
-
-	private World world;
 	
-	public Attack(World world) {
+	public Attack() {
 		super(new Sprite("src/main/java/nl/han/ica/ibilinnor/media/character/attack_effect_animation.gif"), 1);
-		
-		this.world=world;
 	}
 
 	@Override

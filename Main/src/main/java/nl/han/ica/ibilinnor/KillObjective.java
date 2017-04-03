@@ -30,12 +30,6 @@ public class KillObjective implements IObjective, IAlarmListener {
 	}
 
 	@Override
-	public void drawObjective() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public boolean checkVictory() {
 		if (this.kills >= this.numberOfKills) {
 			return true;

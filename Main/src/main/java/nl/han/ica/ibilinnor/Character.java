@@ -37,7 +37,7 @@ public class Character extends AnimatedSpriteObject
 
 		this.world = world;
 		addGameObjectCharacter();
-		attack = new Attack(world);
+		attack = new Attack();
 
 		playerControl = new ArrayList<>();
 		playerControl.add(new Key('a'));
