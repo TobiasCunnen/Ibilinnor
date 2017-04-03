@@ -16,12 +16,14 @@ public class Flag extends SpriteObject implements ICollidableWithGameObjects {
 		super(new Sprite("src/main/java/nl/han/ica/ibilinnor/media/flag.png"));
 		this.world = world;
 		this.firework = new Firework();
+		world.addGameObject(firework, 600, 10);
+		firework.setVisible(false);
 		this.setVisible(false);
 	}
 
 	private void victory() {
 		if (world.objective.checkVictory()) {
-			world.addGameObject(firework, 600, 10);
+			firework.setVisible(true);
 		}
 	}
 

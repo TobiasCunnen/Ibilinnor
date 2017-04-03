@@ -213,7 +213,7 @@ public class Character extends AnimatedSpriteObject
 		}
 	}
 
-	public void addGameObjectAttack(char key) {
+	private void addGameObjectAttack(char key) {
 
 		if (key == 'k') {
 			world.addGameObject(attack, this.getX() + attack.getWidth(), this.getY());
@@ -225,15 +225,15 @@ public class Character extends AnimatedSpriteObject
 
 	}
 
-	public void removeGameObject() {
+	private void removeGameObject() {
 		world.deleteGameObject(attack);
 	}
 
-	public void addGameObjectCharacter() {
+	private void addGameObjectCharacter() {
 		world.addGameObject(this, 25, 560);
 	}
 
-	public void setAttackPosition() {
+	private void setAttackPosition() {
 		if(attackKey=='k'){
 		attack.setX(this.getX() + attack.getWidth());
 		attack.setY(this.getY());
