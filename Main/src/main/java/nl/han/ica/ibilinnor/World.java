@@ -13,6 +13,14 @@ import nl.han.ica.ibilinnor.tiles.GroundTile;
 import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PApplet;
 
+/**
+ * De World klasse initialiseert de direct aanliggende klasse (zie
+ * klassendiagram) en maakt de tilemap en creëert de wereld door deze met een
+ * view weer te geven.
+ * 
+ * @author Joep en Tobias
+ *
+ */
 public class World extends GameEngine {
 
 	private Character player;

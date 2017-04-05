@@ -16,6 +16,14 @@ import nl.han.ica.ibilinnor.tiles.GroundTile;
 import nl.han.ica.ibilinnor.tiles.SecretTile;
 import processing.core.PVector;
 
+/**
+ * In de Character klasse worden alle acties afgehandeld die met de speelbare
+ * personage te maken hebben. Bijvoorbeeld maakt deze een object van de klasse
+ * Attack aan als de speler aanvalt.
+ * 
+ * @author Tobias
+ *
+ */
 public class Character extends AnimatedSpriteObject
 		implements ICollidableWithTiles, ICollidableWithGameObjects, IAlarmListener {
 

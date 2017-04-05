@@ -3,6 +3,16 @@ package nl.han.ica.ibilinnor;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.Alarm;
 import nl.han.ica.OOPDProcessingEngineHAN.Alarm.IAlarmListener;
 
+/**
+ * De KillObjective klasse checkt of je aan de condities om te winnen voldoet.
+ * Deze houdt het aantal benodigde kills bij en vergelijkt het met het aantal
+ * behaalde kills. Het aantal behaalde kills wordt ook door deze klasse
+ * bijgehouden en opgehoogd zodra een vijand is geëlimineerd. De interface
+ * IObjective wordt hier geimplementeert.
+ * 
+ * @author Joep
+ *
+ */
 public class KillObjective implements IObjective, IAlarmListener {
 
 	private int kills;
@@ -42,7 +52,8 @@ public class KillObjective implements IObjective, IAlarmListener {
 	 * checks if the number of kills is equal or greater then the required
 	 * numberOfKills.
 	 * 
-	 * @return  If the condition has been met then return true. Else return false.
+	 * @return If the condition has been met then return true. Else return
+	 *         false.
 	 */
 	@Override
 	public boolean checkVictory() {

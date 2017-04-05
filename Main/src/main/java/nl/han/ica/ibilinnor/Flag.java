@@ -7,6 +7,12 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.Sprite;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.SpriteObject;
 
+/**
+ * De Flag klasse handelt de laatste winconditie af en start dan het vuurwerk.
+ * 
+ * @author Tobias
+ *
+ */
 public class Flag extends SpriteObject implements ICollidableWithGameObjects {
 
 	private World world;

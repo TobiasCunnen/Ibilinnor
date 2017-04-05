@@ -13,22 +13,30 @@ import nl.han.ica.ibilinnor.tiles.GrassTile;
 import nl.han.ica.ibilinnor.tiles.GroundTile;
 import processing.core.PVector;
 
-public abstract class Enemy extends AnimatedSpriteObject implements ICollidableWithTiles,ICollidableWithGameObjects {
-	
+/**
+ * Enemy is een abstracte klasse waarmee alle vijande die we gebruiken worden
+ * aangemaakt. Deze klasse zorgt ervoor dat de vijanden andere objecten in de
+ * game kunnen raken.
+ * 
+ * @author Joep
+ *
+ */
+public abstract class Enemy extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
+
 	protected int health;
 	protected int damage;
 	private boolean isAlive;
 	protected World world;
 	protected Sound hitSound;
-	
-	public Enemy(World world,Sprite sprite, int totalFrames) {
+
+	public Enemy(World world, Sprite sprite, int totalFrames) {
 		super(sprite, totalFrames);
-		this.world=world;
-		this.health=1;
-		this.damage=1;
+		this.world = world;
+		this.health = 1;
+		this.damage = 1;
 		this.isAlive = true;
-		this.hitSound=new Sound(world,"src/main/java/nl/han/ica/ibilinnor/media/impactSplat.mp3");
-		
+		this.hitSound = new Sound(world, "src/main/java/nl/han/ica/ibilinnor/media/impactSplat.mp3");
+
 	}
 
 	@Override
@@ -36,9 +44,9 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 		PVector vector;
 
 		for (CollidedTile ct : collidedTiles) {
-			if (ct.theTile instanceof GrassTile || ct.theTile instanceof GroundTile){
-				
-				if (ct.collisionSide == ct.TOP){
+			if (ct.theTile instanceof GrassTile || ct.theTile instanceof GroundTile) {
+
+				if (ct.collisionSide == ct.TOP) {
 
 					vector = world.getTileMap().getTilePixelLocation(ct.theTile);
 					setY(vector.y - height);
@@ -46,7 +54,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 			}
 		}
 	}
-	
+
 	@Override
 	public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 		for (GameObject co : collidedGameObjects) {
