@@ -28,6 +28,8 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 	private boolean isAlive;
 	protected World world;
 	protected Sound hitSound;
+	protected float ogX;
+	protected int direction;
 
 	public Enemy(World world, Sprite sprite, int totalFrames) {
 		super(sprite, totalFrames);
@@ -36,7 +38,6 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 		this.damage = 1;
 		this.isAlive = true;
 		this.hitSound = new Sound(world, "src/main/java/nl/han/ica/ibilinnor/media/impactSplat.mp3");
-
 	}
 
 	@Override
@@ -64,6 +65,24 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 				world.deleteGameObject(this);
 				setAlive(false);
 				world.objective.addKill();
+			}
+		}
+
+	}
+
+	protected void walk() {
+		ogX=530;
+		int speed = 2;
+		if (direction==0) {
+			setDirectionSpeed(270, speed);
+			if (getX() <= ogX - 100) {
+				direction = 1;
+			}
+		} 
+		if (direction==1) {
+			setDirectionSpeed(90, speed);
+			if(getX() >= ogX + 100){
+				direction = 0;
 			}
 		}
 

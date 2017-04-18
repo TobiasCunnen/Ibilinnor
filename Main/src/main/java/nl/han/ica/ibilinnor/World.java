@@ -59,7 +59,6 @@ public class World extends GameEngine {
 		initializeTileMap();
 		createObjects();
 		createView(worldWidth, worldHeight);
-
 	}
 
 	@Override
@@ -67,6 +66,7 @@ public class World extends GameEngine {
 
 		updateSpawnerTimer();
 		updateObjectiveText();
+		enemySpawn.get(1).enemy.walk();
 	}
 
 	/**
