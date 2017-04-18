@@ -127,6 +127,7 @@ public class Character extends AnimatedSpriteObject
 		}
 
 	}
+	//test
 
 	/**
 	 * Different spites are loaded when a key is pressed
